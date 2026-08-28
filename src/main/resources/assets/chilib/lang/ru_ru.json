@@ -1,0 +1,7 @@
+{
+  "attribute.chilib.arrow_damage": "Урон стрелы",
+  "attribute.chilib.arrow_velocity": "Скорость стрелы",
+  "attribute.chilib.crit_chance": "Шанс критического удара",
+  "attribute.chilib.crit_damage": "Урон критического удара",
+  "attribute.chilib.life_steal": "Похищение жизни"
+}
