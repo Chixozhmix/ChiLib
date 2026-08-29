@@ -3,5 +3,6 @@
   "attribute.chilib.arrow_velocity": "Arrow velocity",
   "attribute.chilib.crit_chance": "Crit Chance",
   "attribute.chilib.crit_damage": "Crit Damage",
-  "attribute.chilib.life_steal": "Life Steal"
+  "attribute.chilib.life_steal": "Life Steal",
+  "attribute.chilib.heal": "Heal"
 }

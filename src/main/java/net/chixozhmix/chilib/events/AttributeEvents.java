@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -61,6 +62,19 @@ public class AttributeEvents {
             if (lifesteal > 0.001) {
                 attacker.heal(dmg * lifesteal);
             }
+        }
+    }
+
+    //Heal
+    @SubscribeEvent
+    public static void healingEven(LivingHealEvent event) {
+        LivingEntity entity = event.getEntity();
+        float startAmount = event.getAmount();
+
+        float heal = (float) entity.getAttributeValue(ChiAttributes.HEAL.get());
+
+        if(heal > 0) {
+            event.setAmount(startAmount * (float) (1.0 + heal));
         }
     }
 }

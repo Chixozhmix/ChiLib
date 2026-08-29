@@ -20,6 +20,7 @@ public class ChiAttributes {
     public static final RegistryObject<Attribute> CRIT_DAMAGE;
     public static final RegistryObject<Attribute> CRIT_CHANCE;
     public static final RegistryObject<Attribute> LIFE_STEAL;
+    public static final RegistryObject<Attribute> HEAL;
     //public static final RegistryObject<Attribute> MELEE_RESISTANCE;
 
     @SubscribeEvent
@@ -30,6 +31,7 @@ public class ChiAttributes {
             event.add(entity, CRIT_DAMAGE.get());
             event.add(entity, CRIT_CHANCE.get());
             event.add(entity, LIFE_STEAL.get());
+            event.add(entity, HEAL.get());
             //event.add(entity, MELEE_RESISTANCE.get());
         });
     }
@@ -42,9 +44,10 @@ public class ChiAttributes {
             ATTRIBUTES =DeferredRegister.create(ForgeRegistries.ATTRIBUTES, ChiLib.MODID);
             ARROW_DAMAGE = baseRangedAttribute("arrow_damage", 1.0D, 0.0D, 10D);
             ARROW_VELOCITY = baseRangedAttribute("arrow_velocity", 1.0D, 0.0D, 10D);
-            CRIT_CHANCE = baseRangedAttribute("crit_chance", 0.05D, 0.0D, 10.0D);
-            CRIT_DAMAGE = baseRangedAttribute("crit_damage", 1.5D, 1.0D, 100.0D);
-            LIFE_STEAL = baseRangedAttribute("life_steal", 0.0D, 0.0D, 10.0D);
+            CRIT_CHANCE = baseRangedAttribute("crit_chance", 0.05D, 0.0D, 1.0D);
+            CRIT_DAMAGE = baseRangedAttribute("crit_damage", 1.5D, 1.0D, 10.0D);
+            LIFE_STEAL = baseRangedAttribute("life_steal", 0.0D, 0.0D, 1.0D);
+            HEAL = baseRangedAttribute("heal", 0.0D, 0.0D, 1.0D);
             //MELEE_RESISTANCE = baseRangedAttribute("crit_damage", 0.0D, 0.0D, 10.0D);
     }
 }
