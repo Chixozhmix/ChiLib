@@ -7,8 +7,8 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 
-//Удобный метод для рецептов зелий. Вызывается в commonSetup
 public class BrewingRecipe implements IBrewingRecipe {
+
     private final Potion input;
     private final Item ingredient;
     private final Potion output;
@@ -20,24 +20,37 @@ public class BrewingRecipe implements IBrewingRecipe {
     }
 
     @Override
-    public boolean isInput(ItemStack input) {
-        return PotionUtils.getPotion(input) == this.input;
+    public boolean isInput(ItemStack stack) {
+        return PotionUtils.getPotion(stack) == input;
     }
 
     @Override
-    public boolean isIngredient(ItemStack ingredient) {
-        return ingredient.getItem() == this.ingredient;
+    public boolean isIngredient(ItemStack stack) {
+        return stack.getItem() == ingredient;
     }
 
     @Override
     public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-        if(!this.isInput(input) || !this.isIngredient(ingredient)) {
+        if (!isInput(input) || !isIngredient(ingredient)) {
             return ItemStack.EMPTY;
         }
 
-        ItemStack itemStack = new ItemStack(input.getItem());
-        itemStack.setTag(new CompoundTag());
-        PotionUtils.setPotion(itemStack, this.output);
-        return itemStack;
+        ItemStack result = new ItemStack(input.getItem());
+        result.setTag(new CompoundTag());
+        PotionUtils.setPotion(result, output);
+
+        return result;
+    }
+
+    public Potion getInputPotion() {
+        return input;
+    }
+
+    public Item getIngredient() {
+        return ingredient;
+    }
+
+    public Potion getOutputPotion() {
+        return output;
     }
 }

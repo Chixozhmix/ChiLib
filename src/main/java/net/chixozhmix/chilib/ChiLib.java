@@ -2,6 +2,7 @@ package net.chixozhmix.chilib;
 
 import com.mojang.logging.LogUtils;
 import net.chixozhmix.chilib.attributes.ChiAttributes;
+import net.chixozhmix.chilib.registers.CLBrewingRecipeRegister;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -34,6 +35,7 @@ public class ChiLib
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
+        event.enqueueWork(CLBrewingRecipeRegister::registerAll);
     }
 
     // Add the example block item to the building blocks tab

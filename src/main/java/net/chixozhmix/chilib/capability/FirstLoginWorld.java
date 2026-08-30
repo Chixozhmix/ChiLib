@@ -2,7 +2,9 @@ package net.chixozhmix.chilib.capability;
 
 import net.minecraft.world.entity.player.Player;
 
-//Первый заход в мир. Можно установить флан в событии PlayerLogin
+/*Первый заход в мир. Можно установить флан в событии PlayerLogin. Это не сохраняется автоматически, поэтому лучше использовать
+копирование nbt при клонировании игрока. Возможно в будущем я реализую это через Capability
+ */
 public class FirstLoginWorld {
     private static final String FIRST_LOGIN_KEY = "FirstLogin";
 

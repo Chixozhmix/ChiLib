@@ -15,7 +15,8 @@ public class PlayerTimer {
         player.getPersistentData().putInt(TIMER_KEY, ticks);
     }
 
-    public static void setTimerNum(Player player, int num) {
+    public static void start(Player player, int ticks, int num) {
+        player.getPersistentData().putInt(TIMER_KEY, ticks);
         player.getPersistentData().putInt(TIMER_NUM, num);
     }
 
@@ -44,5 +45,6 @@ public class PlayerTimer {
 
     public static void stop(Player player) {
         player.getPersistentData().remove(TIMER_KEY);
+        player.getPersistentData().remove(TIMER_NUM);
     }
 }
