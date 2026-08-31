@@ -73,8 +73,8 @@ public class AttributeEvents {
 
         float heal = (float) entity.getAttributeValue(ChiAttributes.HEAL.get());
 
-        if(heal > 0) {
-            event.setAmount(startAmount * (float) (1.0 + heal));
+        if(heal > 1.0) {
+            event.setAmount(startAmount * heal);
         }
     }
 }

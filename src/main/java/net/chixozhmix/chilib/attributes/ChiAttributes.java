@@ -47,7 +47,7 @@ public class ChiAttributes {
             CRIT_CHANCE = baseRangedAttribute("crit_chance", 0.05D, 0.0D, 1.0D);
             CRIT_DAMAGE = baseRangedAttribute("crit_damage", 1.5D, 1.0D, 10.0D);
             LIFE_STEAL = baseRangedAttribute("life_steal", 0.0D, 0.0D, 1.0D);
-            HEAL = baseRangedAttribute("heal", 0.0D, 0.0D, 1.0D);
+            HEAL = baseRangedAttribute("heal", 1.0D, 0.0D, 2.0D);
             //MELEE_RESISTANCE = baseRangedAttribute("crit_damage", 0.0D, 0.0D, 10.0D);
     }
 }

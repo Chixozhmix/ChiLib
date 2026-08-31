@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class Overlays {
     //Обычный оверлей
-    private static void renderOverlayAdditive(GuiGraphics gui, ResourceLocation texture, float r, float g, float b, float a, int screenWidth, int screenHeight) {
+    public static void renderOverlayAdditive(GuiGraphics gui, ResourceLocation texture, float r, float g, float b, float a, int screenWidth, int screenHeight) {
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
@@ -29,7 +29,7 @@ public class Overlays {
     }
 
     //оверлей с заданной текстурой
-    private static void renderOverlay(GuiGraphics gui, ResourceLocation texture, float r, float g, float b, float a, int screenWidth, int screenHeight) {
+    public static void renderOverlay(GuiGraphics gui, ResourceLocation texture, float r, float g, float b, float a, int screenWidth, int screenHeight) {
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
@@ -42,7 +42,7 @@ public class Overlays {
     }
 
     //Анимированный оверлей
-    private static void renderAnimatedOverlay(GuiGraphics gui, ResourceLocation[] frames, float r, float g, float b, float a, int screenWidth, int screenHeight, int ticksPerFrame) {
+    public static void renderAnimatedOverlay(GuiGraphics gui, ResourceLocation[] frames, float r, float g, float b, float a, int screenWidth, int screenHeight, int ticksPerFrame) {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (minecraft.level == null)
