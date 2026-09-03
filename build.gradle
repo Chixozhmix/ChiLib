@@ -80,6 +80,13 @@ dependencies {
     //Jei
     compileOnly fg.deobf("curse.maven:jei-238222:6600311")
     runtimeOnly fg.deobf("curse.maven:jei-238222:6600311")
+
+    //Optional
+    compileOnly fg.deobf("curse.maven:geckolib-388172:6658942")
+    //runtimeOnly fg.deobf("curse.maven:geckolib-388172:6658942")
+
+    compileOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
+    //runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
 }
 
 tasks.named('processResources', ProcessResources).configure {
