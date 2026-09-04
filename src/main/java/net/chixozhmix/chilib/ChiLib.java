@@ -2,6 +2,7 @@ package net.chixozhmix.chilib;
 
 import com.mojang.logging.LogUtils;
 import net.chixozhmix.chilib.attributes.ChiAttributes;
+import net.chixozhmix.chilib.network.ChiLibNetwork;
 import net.chixozhmix.chilib.registers.CLBrewingRecipeRegister;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -36,11 +37,14 @@ public class ChiLib
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         event.enqueueWork(CLBrewingRecipeRegister::registerAll);
+
+        ChiLibNetwork.register();
     }
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

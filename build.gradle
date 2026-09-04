@@ -64,18 +64,29 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    mavenCentral()
+
     maven {
         name = "Forge"
         url = "https://maven.minecraftforge.net/"
     }
 
     maven { url "https://cursemaven.com" }
+    maven { url 'https://api.modrinth.com/maven' }
 
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
+
+    implementation 'org.spongepowered:mixin:0.8.5'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    testAnnotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation("io.github.llamalad7:mixinextras-forge:0.3.5")
 
     //Jei
     compileOnly fg.deobf("curse.maven:jei-238222:6600311")
@@ -87,6 +98,17 @@ dependencies {
 
     compileOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
     //runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
+
+    //ISS Optional
+    compileOnly fg.deobf("curse.maven:caelus-308989:5281700")
+    //runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
+    compileOnly fg.deobf("curse.maven:curios-309927:6418456")
+    //runtimeOnly fg.deobf("curse.maven:curios-309927:6418456")
+
+    compileOnly fg.deobf("maven.modrinth:9nfaJPtX:DbpRfa2k")
+    //runtimeOnly fg.deobf("maven.modrinth:9nfaJPtX:DbpRfa2k")
+    compileOnly fg.deobf("maven.modrinth:s4OWxYQQ:9v34JOKI")
+    //runtimeOnly fg.deobf("maven.modrinth:s4OWxYQQ:9v34JOKI")
 }
 
 tasks.named('processResources', ProcessResources).configure {
@@ -113,12 +135,10 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-                //"MixinConfigs"            : "mixins.${mod_id}.json"
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "mixins.${mod_id}.json"
         ])
     }
-
-    // This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
 }
 
@@ -145,10 +165,10 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-//mixin {
-//    add sourceSets.main, 'dnmmod.refmap.json'
-//    config 'mixins.dnmmod.json'
-//
-//    debug.verbose = true
-//    debug.export = true
-//}
+mixin {
+    add sourceSets.main, 'chilib.refmap.json'
+    config 'mixins.chilib.json'
+
+    debug.verbose = true
+    debug.export = true
+}
