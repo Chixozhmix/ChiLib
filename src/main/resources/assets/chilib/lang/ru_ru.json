@@ -4,5 +4,7 @@
   "attribute.chilib.crit_chance": "Шанс критического удара",
   "attribute.chilib.crit_damage": "Урон критического удара",
   "attribute.chilib.life_steal": "Похищение жизни",
-  "attribute.chilib.heal": "Лечение"
+  "attribute.chilib.heal": "Лечение",
+  "attribute.chilib.jump": "Прыжок",
+  "attribute.chilib.physic_resistance": "Сопротивление физическому урону"
 }

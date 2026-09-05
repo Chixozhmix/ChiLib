@@ -53,12 +53,24 @@ public class AttributeEvents {
         e.setAmount(e.getAmount() * critMult);
     }
 
-    //Life Steal
+    //Life Steal and Melee Resistance
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void lifeSteal(LivingHurtEvent e) {
-        if (e.getSource().getDirectEntity() instanceof LivingEntity attacker && AttributeUtil.isPhysicalDamage(e.getSource())) {
+    public static void lifeSteal(LivingHurtEvent event) {
+        LivingEntity entity = event.getEntity();
+        float startAmount = event.getAmount();
+
+        float resist = (float) entity.getAttributeValue(ChiAttributes.PHYSIC_RESISTANCE.get());
+
+        if(resist > 1.0 && AttributeUtil.isPhysicalDamage(event.getSource())) {
+            float damageMultiplier = 2.0f - resist;
+            float finalDamage = startAmount * damageMultiplier;
+
+            event.setAmount(finalDamage);
+        }
+
+        if (event.getSource().getDirectEntity() instanceof LivingEntity attacker && AttributeUtil.isPhysicalDamage(event.getSource())) {
             float lifesteal = (float) attacker.getAttributeValue(ChiAttributes.LIFE_STEAL.get());
-            float dmg = Math.min(e.getAmount(), e.getEntity().getHealth());
+            float dmg = Math.min(event.getAmount(), event.getEntity().getHealth());
             if (lifesteal > 0.001) {
                 attacker.heal(dmg * lifesteal);
             }
@@ -67,7 +79,7 @@ public class AttributeEvents {
 
     //Heal
     @SubscribeEvent
-    public static void healingEven(LivingHealEvent event) {
+    public static void healingEvent(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
         float startAmount = event.getAmount();
 

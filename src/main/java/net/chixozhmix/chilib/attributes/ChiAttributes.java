@@ -22,7 +22,7 @@ public class ChiAttributes {
     public static final RegistryObject<Attribute> LIFE_STEAL;
     public static final RegistryObject<Attribute> HEAL;
     public static final RegistryObject<Attribute> JUMP;
-    //public static final RegistryObject<Attribute> MELEE_RESISTANCE;
+    public static final RegistryObject<Attribute> PHYSIC_RESISTANCE;
 
     @SubscribeEvent
     public static void onEntityAttributeModification(EntityAttributeModificationEvent event) {
@@ -34,7 +34,7 @@ public class ChiAttributes {
             event.add(entity, LIFE_STEAL.get());
             event.add(entity, HEAL.get());
             event.add(entity, JUMP.get());
-            //event.add(entity, MELEE_RESISTANCE.get());
+            event.add(entity, PHYSIC_RESISTANCE.get());
         });
     }
 
@@ -51,6 +51,6 @@ public class ChiAttributes {
             LIFE_STEAL = baseRangedAttribute("life_steal", 0.0D, 0.0D, 1.0D);
             HEAL = baseRangedAttribute("heal", 1.0D, 0.0D, 2.0D);
             JUMP = baseRangedAttribute("jump", 1.0D, 1.0D, 5.0D);
-            //MELEE_RESISTANCE = baseRangedAttribute("crit_damage", 0.0D, 0.0D, 10.0D);
+            PHYSIC_RESISTANCE = baseRangedAttribute("physic_resistance", 1.0D, 0.0D, 2.0D);
     }
 }

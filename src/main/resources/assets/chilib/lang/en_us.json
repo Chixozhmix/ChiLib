@@ -4,5 +4,8 @@
   "attribute.chilib.crit_chance": "Crit Chance",
   "attribute.chilib.crit_damage": "Crit Damage",
   "attribute.chilib.life_steal": "Life Steal",
-  "attribute.chilib.heal": "Heal"
+  "attribute.chilib.heal": "Heal",
+  "attribute.chilib.jump": "Jump",
+  "attribute.chilib.physic_resistance": "Physic Resistance"
+
 }
