@@ -25,17 +25,9 @@ public class ChiAttributes {
     public static final RegistryObject<Attribute> PHYSIC_RESISTANCE;
 
     @SubscribeEvent
-    public static void onEntityAttributeModification(EntityAttributeModificationEvent event) {
-        event.getTypes().forEach((entity) -> {
-            event.add(entity, ARROW_DAMAGE.get());
-            event.add(entity, ARROW_VELOCITY.get());
-            event.add(entity, CRIT_DAMAGE.get());
-            event.add(entity, CRIT_CHANCE.get());
-            event.add(entity, LIFE_STEAL.get());
-            event.add(entity, HEAL.get());
-            event.add(entity, JUMP.get());
-            event.add(entity, PHYSIC_RESISTANCE.get());
-        });
+    public static void modifyEntityAttributes(EntityAttributeModificationEvent event) {
+        event.getTypes().forEach((entity) ->
+                ATTRIBUTES.getEntries().forEach((attribute) -> event.add(entity, (Attribute)attribute.get())));
     }
 
     public static RegistryObject<Attribute> baseRangedAttribute(String id, double defaultValue, double minValue, double maxValue) {
