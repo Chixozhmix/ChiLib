@@ -12,11 +12,11 @@ import net.minecraftforge.common.util.ITeleporter;
 
 import java.util.function.Function;
 
-/*Утилита для безопасной телепортации игрока. Используйте что-то вроде:
+/**Утилита для безопасной телепортации игрока между измерениями. Используйте что-то вроде:
 ServerLevel undergarden = player.getServer().getLevel(UGDimensions.UNDERGARDEN_LEVEL);
 
 if (undergarden != null) {
-    PortalData.teleportPlayer(player, undergarden);
+    TeleportData.teleportPlayer(player, undergarden);
 }
 Чтобы корректо телепортировать игрока в нужное вам измерение.
  */
@@ -41,14 +41,12 @@ public class TeleportData {
         // Проверяем сначала текущую позицию и близлежащие
         for (int x = -2; x <= 2; x++) {
             for (int z = -2; z <= 2; z++) {
-                // Ищем сверху вниз
                 for (int y = targetPos.getY() + 10; y >= minY; y--) {
                     BlockPos checkPos = new BlockPos(targetPos.getX() + x, y, targetPos.getZ() + z);
                     if (isSafeSpawnPosition(level, checkPos)) {
                         return checkPos.above();
                     }
                 }
-                // Если сверху не нашли, ищем снизу вверх
                 for (int y = minY; y < maxY; y++) {
                     BlockPos checkPos = new BlockPos(targetPos.getX() + x, y, targetPos.getZ() + z);
                     if (isSafeSpawnPosition(level, checkPos)) {
@@ -63,14 +61,11 @@ public class TeleportData {
     }
 
     protected static boolean isSafeSpawnPosition(ServerLevel level, BlockPos pos) {
-        // Проверяем, что блок под ногами твердый и не опасный
         if (!level.getBlockState(pos).isSolid() ||
                 level.getBlockState(pos).is(Blocks.BEDROCK) ||
                 level.getBlockState(pos).is(Blocks.LAVA)) {
             return false;
         }
-
-        // Проверяем, что место для спавна свободно (2 блока воздуха над поверхностью)
         return level.getBlockState(pos.above()).isAir() &&
                 level.getBlockState(pos.above(2)).isAir() &&
                 !level.getBlockState(pos.above()).is(Blocks.BEDROCK) &&
@@ -88,18 +83,13 @@ public class TeleportData {
         public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
             Entity newEntity = repositionEntity.apply(false);
             if (newEntity instanceof ServerPlayer player) {
-                // Убеждаемся, что чанки загружены
                 destWorld.getChunkSource().addRegionTicket(
                         TicketType.POST_TELEPORT,
                         new ChunkPos(targetPos),
                         1,
                         player.getId()
                 );
-
-                // Проверяем окончательную позицию
                 BlockPos finalPos = ensureSafePosition(destWorld, targetPos);
-
-                // Телепортация
                 player.teleportTo(
                         destWorld,
                         finalPos.getX() + 0.5,
@@ -108,8 +98,6 @@ public class TeleportData {
                         yaw,
                         entity.getXRot()
                 );
-
-                // Дополнительная проверка от удушья
                 preventSuffocation(destWorld, player);
             }
             return newEntity;
@@ -121,7 +109,6 @@ public class TeleportData {
                 return pos.atY(level.getMinBuildHeight() + 10);
             }
 
-            // Проверяем блоки над позицией
             for (int i = 0; i < 10; i++) {
                 BlockPos checkPos = pos.above(i);
                 if (level.getBlockState(checkPos).isAir() &&
@@ -139,7 +126,6 @@ public class TeleportData {
                 player.setPos(player.getX(), player.getY() + 1.0, player.getZ());
             }
 
-            // Если достигли максимальной высоты - телепортируем на спавн
             if (player.getY() >= level.getMaxBuildHeight()) {
                 BlockPos spawnPos = level.getSharedSpawnPos();
                 player.teleportTo(

@@ -7,7 +7,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class EntityUtils {
-        public Vec3 findGroundPosition(Entity entity) {
+    public static Vec3 findGroundPosition(Entity entity) {
         Vec3 position = entity.position();
         if (entity.level().getBlockState(entity.blockPosition()).isAir()) {
             BlockHitResult hitResult = entity.level().clip(new ClipContext(position.add((double)0.0F, (double)2.0F, (double)0.0F),

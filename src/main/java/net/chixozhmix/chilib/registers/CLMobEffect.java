@@ -10,12 +10,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
     Здесь три вида - обычный, с эффектом постоянного урона раз в секунду и модифицирующий атрибут (пока только один)
  */
 public class CLMobEffect {
-    public class SimpleEffect extends MobEffect {
+    public static class SimpleEffect extends MobEffect {
         public SimpleEffect(MobEffectCategory pCategory, int pColor) {
             super(pCategory, pColor);
         }
     }
-    public class DamageTickEffect extends MobEffect {
+    public static class DamageTickEffect extends MobEffect {
         private final float damage;
         public DamageTickEffect(int pColor, float damage) {
             super(MobEffectCategory.HARMFUL, pColor);
@@ -38,7 +38,7 @@ public class CLMobEffect {
         }
     }
 
-    public class AttributeEffect extends MobEffect {
+    public static class AttributeEffect extends MobEffect {
         public AttributeEffect(MobEffectCategory pCategory, int pColor) {
             super(pCategory, pColor);
         }
