@@ -1,4 +1,4 @@
-package net.chixozhmix.chilib.client.danger_zone;
+package net.chixozhmix.chilib.utils.entity.geckolib;
 
 public enum ZoneType {
         RECTANGLE, // Для лучей

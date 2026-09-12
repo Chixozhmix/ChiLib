@@ -1,6 +1,5 @@
 package net.chixozhmix.chilib.utils.entity.geckolib;
 
-import net.chixozhmix.chilib.client.danger_zone.ZoneType;
 import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;

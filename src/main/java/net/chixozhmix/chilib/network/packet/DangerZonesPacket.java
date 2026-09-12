@@ -1,10 +1,10 @@
 package net.chixozhmix.chilib.network.packet;
 
-import net.chixozhmix.chilib.client.danger_zone.ZoneType;
-import net.chixozhmix.chilib.utils.entity.geckolib.DangerZoneProvider;
+import net.chixozhmix.chilib.client.danger_zone.DangerZonePacketHandler;
+import net.chixozhmix.chilib.utils.entity.geckolib.ZoneType;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.ArrayList;
@@ -47,8 +47,8 @@ import java.util.function.Supplier;
  * и уже эти два класса вызывать, например, при старте и конце выполнения цели атаки
  */
 public class DangerZonesPacket {
-    private final int entityId;
-    private final List<DangerZoneData> zones;
+    public final int entityId;
+    public final List<DangerZoneData> zones;
 
     public DangerZonesPacket(int entityId, List<DangerZoneData> zones) {
         this.entityId = entityId; this.zones = zones;
@@ -99,31 +99,12 @@ public class DangerZonesPacket {
     public static void handle(DangerZonesPacket packet, Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
 
-        context.enqueueWork(() -> {
-            Level level = net.minecraft.client.Minecraft.getInstance().level;
-
-            if (level == null)
-                return;
-
-            Entity entity = level.getEntity(packet.entityId);
-
-            // Проверяем, поддерживает ли сущность провайдер опасных зон
-            if (entity instanceof DangerZoneProvider provider) {
-
-                // Превращаем пришедшие данные из пакета в объекты DangerZone
-                List<DangerZoneProvider.DangerZone> zones = packet.zones.stream().map(zoneData -> {
-                    DangerZoneProvider.DangerZone zone = new DangerZoneProvider.DangerZone();
-                    zone.setType(zoneData.type());
-                    zone.setOffset((float) zoneData.x(), (float) zoneData.y(), (float) zoneData.z()); // Если у вас есть такой сеттер, либо через Vector3f
-                    zone.setRotation(zoneData.rotation());
-                    zone.setSize(zoneData.scaleX(), zoneData.scaleY(), zoneData.scaleZ());
-                    return zone;
-                }).toList();
-
-                // Передаем список зон в сущность
-                provider.setClientDangerZones(zones);
-            }
-        });
+        context.enqueueWork(() ->
+                DistExecutor.unsafeRunWhenOn(
+                        Dist.CLIENT,
+                        () -> () -> DangerZonePacketHandler.handle(packet)
+                )
+        );
 
         context.setPacketHandled(true);
     }
