@@ -1,6 +1,7 @@
 package net.chixozhmix.chilib.events;
 
 import net.chixozhmix.chilib.ChiLib;
+import net.chixozhmix.chilib.client.animations.AnimationHelper;
 import net.chixozhmix.chilib.utils.minecraft.IMinecraftInstanceHelper;
 import net.chixozhmix.chilib.utils.minecraft.MInecraftInstanceHelper;
 import net.minecraft.client.Minecraft;

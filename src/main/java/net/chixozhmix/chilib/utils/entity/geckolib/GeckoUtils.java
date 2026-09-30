@@ -13,40 +13,40 @@ public class GeckoUtils {
      * должен иметь тоже самое название, что и текстура. Например, если текстура называется villager, то и подкаталог
      * должен называться villager.
      * @param modId - ID мода
-     * @param name - навзание текстуры
+     * @param name - навзание текстуры без расширения файла
      */
     // Resource Location текстуры существа
     public static ResourceLocation textureLocation(String modId, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/" + name + ".png");
+        return ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/" + name).withSuffix(".png");
     }
 
     // Resource Location текстуры существа в папке
     public static ResourceLocation textureLocationFolder(String modId, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/" + name + "/" + name + ".png");
+        return ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/" + name + "/" + name).withSuffix(".png");
     }
 
     // Resource Location светящейся текстуры существа. Предполагается, что текстура находится в папке
     public static ResourceLocation glowTextureLocationFolder(String modId, String folderName, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/" + folderName + "/" + name + ".png");
+        return ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/" + folderName + "/" + name).withSuffix(".png");
     }
 
     // Resource Location модели существа
     public static ResourceLocation geoLocation(String modId, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "geo/" + name + ".json");
+        return ResourceLocation.fromNamespaceAndPath(modId, "geo/" + name).withSuffix(".json");
     }
 
     // Resource Location модели существа в папке
     public static ResourceLocation geoLocationFolder(String modId, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "geo/" + name + "/" + name + ".json");
+        return ResourceLocation.fromNamespaceAndPath(modId, "geo/" + name + "/" + name).withSuffix(".json");
     }
 
     // Resource Location анимации существа
     public static ResourceLocation animLocation(String modId, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "animations/" + name + ".json");
+        return ResourceLocation.fromNamespaceAndPath(modId, "animations/" + name).withSuffix(".json");
     }
 
     // Resource Location анимации существа в папке
     public static ResourceLocation animLocationFolder(String modId, String name) {
-        return ResourceLocation.fromNamespaceAndPath(modId, "animations/" + name + "/" + name + ".json");
+        return ResourceLocation.fromNamespaceAndPath(modId, "animations/" + name + "/" + name).withSuffix(".json");
     }
 }

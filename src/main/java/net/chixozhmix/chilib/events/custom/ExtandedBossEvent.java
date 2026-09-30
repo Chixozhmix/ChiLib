@@ -89,18 +89,12 @@ public class ExtandedBossEvent extends BossEvent {
         }
     }
 
-    /**
-     * Makes the boss visible to the given player.
-     */
     public void addPlayer(ServerPlayer player) {
         if (this.players.add(player) && this.visible) {
             player.connection.send(ClientboundBossEventPacket.createAddPacket(this));
         }
     }
 
-    /**
-     * Makes the boss non-visible to the given player.
-     */
     public void removePlayer(ServerPlayer player) {
         if (this.players.remove(player) && this.visible) {
             player.connection.send(ClientboundBossEventPacket.createRemovePacket(this.getId()));

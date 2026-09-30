@@ -25,6 +25,12 @@ public class TeleportData {
         return currentLevel;
     }
 
+
+    /**
+     * Вам нужен только этот метод
+     * @param player - игрок, которого нужно телепортировать
+     * @param targetLevel - измерение, в которое нужно телепортировать игрока
+     */
     public static void teleportPlayer(Player player, ServerLevel targetLevel) {
         if (player.level().isClientSide || player.getServer() == null) return;
         if (targetLevel == null) return;

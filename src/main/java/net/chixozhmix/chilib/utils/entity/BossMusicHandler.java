@@ -10,11 +10,7 @@ public class BossMusicHandler extends AbstractTickableSoundInstance {
 
     public BossMusicHandler(Entity boss, IBossMusic musicBoss) {
 
-        super(
-                musicBoss.getBossMusic(),
-                SoundSource.MUSIC,
-                SoundInstance.createUnseededRandom()
-        );
+        super(musicBoss.getBossMusic(), SoundSource.MUSIC, SoundInstance.createUnseededRandom());
 
         this.boss = boss;
 

@@ -3,6 +3,8 @@ package net.chixozhmix.chilib.network;
 import net.chixozhmix.chilib.ChiLib;
 import net.chixozhmix.chilib.network.packet.DangerZonesPacket;
 import net.chixozhmix.chilib.network.packet.EntityEventPacket;
+import net.chixozhmix.chilib.network.packet.PlayPlayerAnimationPacket;
+import net.chixozhmix.chilib.network.packet.SyncAnimPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -28,21 +30,10 @@ public class ChiLibNetwork {
 
         INSTANCE = net;
 
-        INSTANCE.registerMessage(
-                id(),
-                DangerZonesPacket.class,
-                DangerZonesPacket::encode,
-                DangerZonesPacket::decode,
-                DangerZonesPacket::handle
-        );
-
-        INSTANCE.registerMessage(
-                id(),
-                EntityEventPacket.class,
-                EntityEventPacket::toBytes,
-                EntityEventPacket::new,
-                EntityEventPacket::handle
-        );
+        INSTANCE.registerMessage(id(), DangerZonesPacket.class, DangerZonesPacket::encode, DangerZonesPacket::decode, DangerZonesPacket::handle);
+        INSTANCE.registerMessage(id(), EntityEventPacket.class, EntityEventPacket::toBytes, EntityEventPacket::new, EntityEventPacket::handle);
+        INSTANCE.registerMessage(id(), SyncAnimPacket.class, SyncAnimPacket::toBytes, SyncAnimPacket::new, SyncAnimPacket::handle);
+        INSTANCE.registerMessage(id(), PlayPlayerAnimationPacket.class, PlayPlayerAnimationPacket::toBytes, PlayPlayerAnimationPacket::new, PlayPlayerAnimationPacket::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {

@@ -7,6 +7,11 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class EntityUtils {
+    /**
+     * Ищет позицию на земле
+     * @param entity - целевая сущность
+     * @return Vec3 позиции на земле
+     */
     public static Vec3 findGroundPosition(Entity entity) {
         Vec3 position = entity.position();
         if (entity.level().getBlockState(entity.blockPosition()).isAir()) {

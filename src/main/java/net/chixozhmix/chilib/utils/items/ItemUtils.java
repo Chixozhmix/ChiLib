@@ -12,7 +12,12 @@ import java.util.Optional;
 
 //Утилиты предметов
 public class ItemUtils {
-    //Провекрка полного сета брони
+
+    /**Провекрка полного сета брони
+     * Желательно использовать это в armorTick, поскольку метод возвращает истину при любой надетой во все слоты брони.
+     * @param player - целевой игрок
+     * @return истину, если на игроке все элементы брони
+     */
     public static boolean hasFullSet(Player player) {
         ItemStack boots = player.getInventory().getArmor(0);
         ItemStack leggings = player.getInventory().getArmor(1);
