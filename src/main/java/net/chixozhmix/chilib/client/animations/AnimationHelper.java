@@ -18,7 +18,7 @@ import net.minecraft.world.entity.player.Player;
     Зарегестрируйте это в onClientSetup:
     AnimationHelper.initializePlayerAnimationFactory();
 
-    Примечание: это работает только при наличии GeckoLib. Без него могут возникнуть проблемы, но я не проверял, ток что...
+    Примечание: это работает только при наличии GeckoLib. Без него могут возникнуть проблемы, но я не проверял, так что...
  */
 
 public class AnimationHelper {

@@ -47,4 +47,8 @@ public class ChiLibNetwork {
     public static <MSG> void sendToTrackingPlayer(MSG message, Entity entity) {
         INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), message);
     }
+
+    public static <MSG> void sendToTrackingPlayerAndSelf(MSG message, Entity entity) {
+        INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), message);
+    }
 }
