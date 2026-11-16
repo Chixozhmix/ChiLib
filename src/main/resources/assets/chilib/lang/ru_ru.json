@@ -6,5 +6,9 @@
   "attribute.chilib.life_steal": "Похищение жизни",
   "attribute.chilib.heal": "Лечение",
   "attribute.chilib.jump": "Прыжок",
-  "attribute.chilib.physic_resistance": "Сопротивление физическому урону"
+  "attribute.chilib.physic_resistance": "Сопротивление физическому урону",
+
+
+  "item.chilib.salted_cucumbers": "Соленые огурчики",
+  "item.chilib.kefir_bottle": "Бутылка кефира"
 }
