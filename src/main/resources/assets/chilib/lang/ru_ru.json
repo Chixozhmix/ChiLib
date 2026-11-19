@@ -10,5 +10,7 @@
 
 
   "item.chilib.salted_cucumbers": "Соленые огурчики",
-  "item.chilib.kefir_bottle": "Бутылка кефира"
+  "item.chilib.kefir_bottle": "Бутылка кефира",
+
+  "entity.chilib.funny_cat": "Смешная кошечка"
 }

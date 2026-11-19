@@ -9,6 +9,8 @@
   "attribute.chilib.physic_resistance": "Physic Resistance",
 
   "item.chilib.salted_cucumbers": "Salted cucumbers",
-  "item.chilib.kefir_bottle": "Kefir bottle"
+  "item.chilib.kefir_bottle": "Kefir bottle",
+
+  "entity.chilib.funny_cat": "Funny cat"
 
 }
