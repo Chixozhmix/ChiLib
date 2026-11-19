@@ -1,7 +1,11 @@
 package net.chixozhmix.chilib.misc.entity;
 
+import net.chixozhmix.chilib.registers.CLItemRegister;
+import net.chixozhmix.chilib.registers.CLSoundsRegister;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
@@ -12,12 +16,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class FunnyCatEntity extends Animal {
     public final AnimationState idleAnimState = new AnimationState();
     private int idleAnimTimeout = 0;
+
+    private int cooldown = 0;
 
     private static final AttributeSupplier.Builder ATTRIBUTES = Animal.createLivingAttributes()
             .add(Attributes.MAX_HEALTH, 75D)
@@ -30,11 +37,38 @@ public class FunnyCatEntity extends Animal {
     }
 
     @Override
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemStack = pPlayer.getItemInHand(pHand);
+
+        if(itemStack.is(CLItemRegister.KEFIR_BOTTLE.get()) && !this.level().isClientSide) {
+            cooldown = 140;
+
+            if(!pPlayer.isCreative())
+                itemStack.shrink(1);
+
+            this.playSound(CLSoundsRegister.NECO_EATING.get(), 1.0F, 1.0F);
+
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
         if(this.level().isClientSide()) {
             setupAnimationStates();
+        }
+
+        if(cooldown > 0) {
+            this.getNavigation().stop();
+            this.setSprinting(false);
+
+            if(--cooldown <= 0) {
+                this.kill();
+            }
         }
     }
 
@@ -73,17 +107,17 @@ public class FunnyCatEntity extends Animal {
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return super.getHurtSound(pDamageSource);
+        return CLSoundsRegister.NECO_HURT.get();
     }
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
-        return super.getAmbientSound();
+        return CLSoundsRegister.NECO_EMBIENT.get();
     }
 
     @Override
     protected @Nullable SoundEvent getDeathSound() {
-        return super.getDeathSound();
+        return CLSoundsRegister.NECO_DEATH.get();
     }
 
     @Override

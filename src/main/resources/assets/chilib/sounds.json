@@ -1,0 +1,22 @@
+{
+  "nya_nya": {
+    "sounds": [
+      "chilib:nya_nya"
+    ]
+  },
+  "pyai_pyai": {
+    "sounds": [
+      "chilib:pyai_pyai"
+    ]
+  },
+  "neco_eating": {
+    "sounds": [
+      "chilib:neco_eating"
+    ]
+  },
+  "neco_death": {
+    "sounds": [
+      "chilib:neco_death"
+    ]
+  }
+}

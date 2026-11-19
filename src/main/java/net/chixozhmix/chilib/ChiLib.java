@@ -6,6 +6,7 @@ import net.chixozhmix.chilib.network.ChiLibNetwork;
 import net.chixozhmix.chilib.registers.CLBrewingRecipeRegister;
 import net.chixozhmix.chilib.registers.CLEntityRegister;
 import net.chixozhmix.chilib.registers.CLItemRegister;
+import net.chixozhmix.chilib.registers.CLSoundsRegister;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -36,6 +37,7 @@ public class ChiLib
         ChiAttributes.ATTRIBUTES.register(modEventBus);
         CLItemRegister.register(modEventBus);
         CLEntityRegister.register(modEventBus);
+        CLSoundsRegister.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
     }
